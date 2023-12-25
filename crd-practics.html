@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="name">Name</label>
+    <input type="text" id="username">
+    <button id="submit1">submit</button>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>delete</th>
+            </tr>
+           
+        </thead>
+        <tbody id="fulldatable"></tbody>
+    </table>
+    
+
+    <script>
+    let alldata = [];
+    var username=document.getElementById("username");
+    var submit1=document.getElementById("submit1");
+    var table1=document.getElementById("fulldatable")
+
+
+    submit1.onclick = function(){
+        displayData()
+        register()
+
+    }
+
+    function displayData(){
+        alldata.push({
+            username:username.value,
+
+        })
+
+    }
+
+    function register (){
+        table1.innerHTML = "";
+
+        for(let i = 0; i< alldata.length; i++ ){
+            var row=table1.insertRow();
+            var cell1=row.insertCell(0)
+            var cell2=row.insertCell(1)
+
+            cell1.innerHTML=alldata[i].username;
+            cell2.innerHTML= `<button onclick="deleterow(${i})">delete</button>`;
+        }
+
+    }
+
+    function deleterow(index){
+        alldata.splice(index,1)
+        displayData()
+
+    }
+
+     
+    </script>
+</body>
+</html>

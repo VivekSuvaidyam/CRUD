@@ -1,0 +1,75 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+.adding{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+   
+  
+}
+
+.btton{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btton button {
+    width: 50%;
+    margin: 10px;
+    
+}
+
+.employe-add {
+    background-color: aqua;
+    padding: 10px;
+    border-radius: 10px;
+    
+    
+    
+    
+}
+
+
+
+.add-employe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px; 
+    
+}
+
+#tabledata {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background-color: greenyellow;
+}
+
+
+
+
+
+
+
+
+

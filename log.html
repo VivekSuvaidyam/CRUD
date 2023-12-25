@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./log.css">
+</head>
+
+<body>
+    <form>
+        <div class="signin">
+            <h2 class="sign-text">SIGN IN</h2>
+            <div class="form">
+                <div class="inputBox">
+                    <input class="input-text" id="username" required type="text" name="usename"
+                        placeholder="Username"><br><br>
+                    <input class="input-text" name="Password" placeholder="Password" id="password">
+                </div>
+                <div class="links">
+                    <a href="#">Forgot Password</a>
+                    <p class="pra">Signup</p>
+                </div>
+                <div class="inputBox">
+                    <input class="btn" onclick="myfunc()" type="button" value="Login">
+                </div>
+            </div>
+        </div>
+        <p id="output"></p>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </form>
+
+    <script>
+        let details = [];
+
+        function myfunc() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username.trim() === '') {
+        alert("Enter value");
+        return;
+    }
+
+            let data = {
+                username: username,
+                password: password
+
+                
+            };
+            details.push(data);
+            getData();
+            document.getElementById("username").value = '';
+            document.getElementById("password").value = '';
+            
+        }
+
+        function getData() {
+            let tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            for (let i = 0; i < details.length; i++) {
+                let row = tableBody.insertRow();
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+
+
+                cell1.innerHTML = details[i].username;
+                cell2.innerHTML = details[i].password;
+                cell3.innerHTML = `<button onclick="deleteRow(${i})">Delete</button>`;
+                cell4.innerHTML = `<button onclick="editRow(${i})">Edit</button>`;
+            }
+        }
+
+        function deleteRow(index) {
+            details.splice(index, 1)
+            getData()
+
+            
+        }
+        function editRow(index){
+            let newUsername = prompt("Enter new username:", details[index].username);
+           
+        let newPassword = prompt("Enter new password:", details[index].password);
+
+        if (newUsername !== null && newPassword !== null) {
+            details[index].username = newUsername;
+            details[index].password = newPassword;
+            getData();
+        }
+    }
+
+
+    </script>
+</body>
+
+</html>
