@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    
     <link rel="stylesheet" href="./log.css">
+   
 </head>
 
 <body>
@@ -45,26 +49,36 @@
     <script>
         let details = [];
 
+        if (localStorage.getItem("stridata"))
+            details = JSON.parse(localStorage.getItem("stridata"));
+        getData()
+
+
         function myfunc() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
             if (username.trim() === '') {
-        alert("Enter value");
-        return;
-    }
+                alert("Enter value");
+                return;
+            }
 
             let data = {
                 username: username,
                 password: password
 
-                
+
             };
             details.push(data);
+            datasave();
             getData();
             document.getElementById("username").value = '';
             document.getElementById("password").value = '';
-            
+
+        }
+
+        function datasave() {
+            localStorage.setItem("stridata", JSON.stringify(details))
         }
 
         function getData() {
@@ -81,28 +95,31 @@
 
                 cell1.innerHTML = details[i].username;
                 cell2.innerHTML = details[i].password;
-                cell3.innerHTML = `<button onclick="deleteRow(${i})">Delete</button>`;
-                cell4.innerHTML = `<button onclick="editRow(${i})">Edit</button>`;
+                cell3.innerHTML = `<span onclick="deleteRow(${i})" class="material-symbols-outlined">delete</span>`;
+                cell4.innerHTML = `<span onclick="editRow(${i})" class="material-symbols-outlined">edit</span>`;
+                
             }
         }
 
         function deleteRow(index) {
             details.splice(index, 1)
+            datasave();
             getData()
 
-            
-        }
-        function editRow(index){
-            let newUsername = prompt("Enter new username:", details[index].username);
-           
-        let newPassword = prompt("Enter new password:", details[index].password);
 
-        if (newUsername !== null && newPassword !== null) {
-            details[index].username = newUsername;
-            details[index].password = newPassword;
-            getData();
         }
-    }
+        function editRow(index) {
+            let newUsername = prompt("Enter new username:", details[index].username);
+
+            let newPassword = prompt("Enter new password:", details[index].password);
+
+            if (newUsername !== null && newPassword !== null) {
+                details[index].username = newUsername;
+                details[index].password = newPassword;
+                datasave();
+                getData();
+            }
+        }
 
 
     </script>
